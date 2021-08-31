@@ -15,7 +15,7 @@ const {
 // CREATE A POST
 
 router.post("/", authMiddleware, async (req, res) => {
-  const { text, location, picUrl } = req.body;
+  const { text, language, picUrl } = req.body;
 
   if (text.length < 1) return res.status(401).send("Text must be atleast 1 character");
 
@@ -24,7 +24,7 @@ router.post("/", authMiddleware, async (req, res) => {
       user: req.userId,
       text
     };
-    if (location) newPost.location = location;
+    if (language) newPost.language = language;
     if (picUrl) newPost.picUrl = picUrl;
 
     const post = await new PostModel(newPost).save();
